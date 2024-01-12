@@ -14,7 +14,6 @@ Features:
 -   Adds useful object metadata:
     ```json
     {
-        "Content-Type": "application/gzip",
         "X-Amz-Meta-Content-Md5": "8b0dcc24439db3359bdd926f025aa635",
         "X-Amz-Meta-Modalities": "CT,SR",
         "X-Amz-Meta-Total-Count": "4"
