@@ -54,7 +54,7 @@ def main() -> int:
     if args.debug:
         print(stat_json)
     existing_md5 = None
-    if proc.returncode == 0 and not args.overwrite:
+    if proc.returncode == 0:
         print(
             f"Object already exists: '{object_path}'. Will compare checksums",
             file=sys.stderr,
@@ -94,7 +94,7 @@ def main() -> int:
     tar_data = subprocess.check_output(tar_cmd)
     tar_md5 = hashlib.md5(tar_data).hexdigest()
 
-    if not args.overwrite:
+    if existing_md5 and not args.overwrite:
         if existing_md5 == tar_md5:
             return 0
         print(
