@@ -23,3 +23,10 @@ Features:
 -   Verify checksum of existing objects, and `--overwrite` if specified
 
 Directory format must be `<prefix>/<YYYY>/<MM>/<DD>/<AccessionNumber>/`, e.g., `/PACS/2017/05/28/ABCD`.
+
+This can be used in a parallel loop like so:
+
+```bash
+$ find ~/tmp/PACS -mindepth 4 -maxdepth 4 -type d -print0 |
+    xargs -P4 -0 -i bash -c './dicom-to-minio.py myminio/test-1/pacs ~/tmp/PACS ${1#/home/rkm/tmp/PACS/}' - "{}"
+```
