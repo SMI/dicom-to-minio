@@ -55,10 +55,11 @@ def main() -> int:
         print(stat_json)
     existing_md5 = None
     if proc.returncode == 0:
-        print(
-            f"Object already exists: '{object_path}'. Will compare checksums",
-            file=sys.stderr,
-        )
+        if not args.overwrite:
+            print(
+                f"Object already exists: '{object_path}'. Will compare checksums",
+                file=sys.stderr,
+            )
         existing_md5 = stat_json["metadata"]["X-Amz-Meta-Content-Md5"]
 
     file_count = 0
