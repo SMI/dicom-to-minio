@@ -1,0 +1,11 @@
+useTabs: false
+proseWrap: preserve
+printWidth: 120
+overrides:
+  - files: "*.md"
+    options:
+      proseWrap: always
+      tabWidth: 4
+  - files: "*.y(a|)ml"
+    options:
+      tabWidth: 2
