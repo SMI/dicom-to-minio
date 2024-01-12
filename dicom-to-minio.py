@@ -38,7 +38,7 @@ def main() -> int:
 
     if not re.match(r"^\d{4}\/\d{2}\/\d{2}/\w*/?$", args.acc_dir_relative):
         print(
-            f"Invalid format for acc_dir_relative: '{args.acc_dir_relative}'",
+            f"Invalid format for acc_dir_relative: {args.acc_dir_relative}",
             file=sys.stderr,
         )
         return 1
@@ -53,11 +53,12 @@ def main() -> int:
     stat_json = json.loads(proc.stdout.decode())
     if args.debug:
         print(stat_json)
+
     existing_md5 = None
     if proc.returncode == 0:
         if not args.overwrite:
             print(
-                f"Object already exists: '{object_path}'. Will compare checksums",
+                f"Object {object_path} already exists. Will compare checksums",
                 file=sys.stderr,
             )
         existing_md5 = stat_json["metadata"]["X-Amz-Meta-Content-Md5"]
@@ -86,8 +87,7 @@ def main() -> int:
         "tar",
         "-cO",
         f"--use-compress-program=''/usr/bin/gzip -{args.compression_level}''",
-        "-C",
-        acc_dir_abs,
+        *("-C", acc_dir_abs),
         ".",
     )
     if args.debug:
@@ -114,8 +114,7 @@ def main() -> int:
         "mc",
         "pipe",
         "--quiet",
-        "--attr",
-        ";".join([f"{k}={v}" for k, v in attrs.items()]),
+        *("--attr", ";".join([f"{k}={v}" for k, v in attrs.items()])),
         object_path,
     )
     if args.debug:
