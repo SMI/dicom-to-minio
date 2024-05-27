@@ -23,7 +23,7 @@ repos:
       - id: check-hooks-apply
       - id: check-useless-excludes
   - repo: https://github.com/codespell-project/codespell
-    rev: "v2.2.6"
+    rev: "v2.3.0"
     hooks:
       - id: codespell
         args:
@@ -50,7 +50,7 @@ repos:
           )
   # Markdown
   - repo: https://github.com/tcort/markdown-link-check
-    rev: "v3.12.1"
+    rev: "v3.12.2"
     hooks:
       - id: markdown-link-check
         args: [--quiet, --config, .meta/markdown-link-check.json]
